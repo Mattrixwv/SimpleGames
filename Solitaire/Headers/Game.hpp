@@ -13,17 +13,18 @@
 #include <vector>
 #include "Card.hpp"
 #include "TermColors.hpp"
+#include "globalVars.hpp"
 
 
 class Game{
 private:
-	Card deck[52];
-	std::vector<Card*> piles[7];
-	std::vector<Card*> foundations[4];
-	std::stack<Card*> draw;
-	std::stack<Card*> discard;
+	std::vector<Card> piles[NUM_PILES];
+	std::vector<Card> foundations[Suits::NUM];
+	std::stack<Card> draw;
+	std::stack<Card> discard;
 	mee::TermColors term;
 	void setup();	//Sets up the different piles for cards. Only called in setup and reset
+	void shuffle();
 	void deal();
 	void discardToPile(unsigned int pil);
 	void discardToFoundation(unsigned int found);
@@ -37,6 +38,8 @@ public:
 	~Game();
 	std::string instruction(std::string move);
 	std::string operator()(std::string move);	//Simply calls instruction
+	std::string print(Card card);
+	std::string print();	//Prints everythingin the draw. Used for debugging
 };
 
 #endif //GAME_HPP

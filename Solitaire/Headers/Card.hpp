@@ -8,7 +8,7 @@
 #define CARD_HPP
 
 
-enum Suits{	SPADES, HEARTS, CLUBS, DIAMONDS, EMPTY };
+enum Suits{	SPADES, HEARTS, CLUBS, DIAMONDS, NUM };
 enum suitColor{ RED, BLACK };
 
 class Card{

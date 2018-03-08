@@ -7,9 +7,13 @@
 
 #include <string>
 #include <sstream>
+#include <algorithm>
+#include <random>
 #include "../Headers/TermColors.hpp"
 #include "../Headers/Card.hpp"
 #include "../Headers/Game.hpp"
+#include "../Headers/globalVars.hpp"
+
 /*
 	Card deck[52];
 	std::vector<Card*> piles[7];
@@ -17,28 +21,10 @@
 	std::stack<Card*> draw;
 	std::stack<Card*> discard;
 	mee::TermColors term;
-	void setup();	//Sets up the different piles for cards. Only called in setup and reset
-	void deal();
-	void discardToPile(unsigned int pil);
-	void discardToFoundation(unsigned int found);
-	void foundationToPile(unsigned int found, unsigned int pil);
-	void pileToFoundation(unsigned int pil, unsigned int found);
-	void pileToPile(unsigned int fromPil, unsigned int toPil);
-	bool isValidMove(Card* fromCard, Card* toCard, bool isFoundation = false);	//Checks if you can move a card
-	std::string suggestion();
-public:
-	Game();
-	~Game();
-	std::string instruction(std::string move);
-	std::string operator()(std::string move);	//Simply calls instruction
 */
 
-Game::Game() : deck{{1, SPADES}, {2, SPADES}, {3, SPADES}, {4, SPADES}, {5, SPADES}, {6, SPADES}, {7, SPADES}, {8, SPADES}, {9, SPADES}, {10, SPADES}, {11, SPADES}, {12, SPADES}, {13, SPADES},
-					{1, HEARTS}, {2, HEARTS}, {3, HEARTS}, {4, HEARTS}, {5, HEARTS}, {6, HEARTS}, {7, HEARTS}, {8, HEARTS}, {9, HEARTS}, {10, HEARTS}, {11, HEARTS}, {12, HEARTS}, {13, HEARTS},
-					{1, CLUBS}, {2, CLUBS}, {3, CLUBS}, {4, CLUBS}, {5, CLUBS}, {6, CLUBS}, {7, CLUBS}, {8, CLUBS}, {9, CLUBS}, {10, CLUBS}, {11, CLUBS}, {12, CLUBS}, {13, CLUBS},
-					{1, DIAMONDS}, {2, DIAMONDS}, {3, DIAMONDS}, {4, DIAMONDS}, {5, DIAMONDS}, {6, DIAMONDS}, {7, DIAMONDS}, {8, DIAMONDS}, {9, DIAMONDS}, {10, DIAMONDS}, {11, DIAMONDS}, {12, DIAMONDS}, {13, DIAMONDS}}
-{
-
+Game::Game(){
+	setup();
 }
 
 Game::~Game(){
@@ -46,6 +32,46 @@ Game::~Game(){
 }
 
 void Game::setup(){
+	//Make sure the piles are empty
+	for(int pileCnt = 0;pileCnt < NUM_PILES;++pileCnt){
+		piles[pileCnt].empty();
+	}
+	//Make sure the foundations are empty
+	for(int fndCnt = 0;fndCnt < Suits::NUM;++fndCnt){
+		foundations[fndCnt].empty();
+	}
+	//Make sure the draw is empty
+	draw.empty();
+	//Make sure the discard is empty
+	discard.empty();
+	//Create the correct number of cards
+	std::vector<Card> deck;
+	deck.reserve(52);
+		//Setup Spades
+	for(int cnt = 1;cnt <= 13;++cnt){
+		deck.emplace_back(cnt, SPADES);
+	}
+		//Setup Hearts
+	for(int cnt = 1;cnt <= 13;++cnt){
+		deck.emplace_back(cnt, HEARTS);
+	}
+		//Setup Diamonds
+	for(int cnt = 1;cnt <= 13;++cnt){
+		deck.emplace_back(cnt, DIAMONDS);
+	}
+		//Setup Clubs
+	for(int cnt = 1;cnt <= 13;++cnt){
+		deck.emplace_back(cnt, CLUBS);
+	}
+	//Shuffle the cards
+	std::shuffle(deck.begin(), deck.end(), std::default_random_engine(std::random_device{}()));
+	//Put all of the cards in the draw
+	for(int cnt = 0;cnt < 52;++cnt){
+		draw.push(deck[cnt]);
+	}
+}
+
+void Game::shuffle(){
 
 }
 
@@ -87,4 +113,18 @@ std::string Game::instruction(std::string move){
 
 std::string Game::operator()(std::string move){
 
+}
+
+std::string Game::print(Card card){
+	//Need to add colors
+}
+
+std::string Game::print(){
+	//Need to add Colors
+	std::stringstream temp("");
+	while(!draw.empty()){
+		temp << draw.top().getSize() << ' ' << draw.top().getSuit() << '\n';
+		draw.pop();
+	}
+	return temp.str();
 }

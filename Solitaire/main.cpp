@@ -1,5 +1,7 @@
 #include <iostream>
 #include <vector>
+#include "Headers/Game.hpp"
+
 
 int main(){
 	//std::vector<int> vec;
@@ -10,8 +12,12 @@ int main(){
 	//for(int cnt = 0;cnt < 5;++cnt){
 	//	std::cout << vec.at(cnt) << std::endl;
 	//}
-	std::cout << u8"\u2660" << u8"\u2665" << u8"\u2663" << u8"\u2666" << std::endl;
-	std::cout << u8"\u2660\u2665\u2663\u2666" << std::endl;
-	std::cin.get();
+	//std::cout << u8"\u2660" << u8"\u2665" << u8"\u2663" << u8"\u2666" << std::endl;
+	//std::cout << u8"\u2660\u2665\u2663\u2666" << std::endl;
+	//std::cin.get();
+
+	Game game;
+	std::cout << game.print();
+
 	return 0;
 }

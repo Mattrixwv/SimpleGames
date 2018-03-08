@@ -1,3 +1,7 @@
+//Games/Solitaire/HEaders/TermColors.hpp
+//Matthew Ellison
+// Created: 3-6-18
+//Modified: 3-6-18
 //This file contains the class that helps control the colors presented on the terminal
 //It will also aid in printing all of the cards and stacks of cards
 //This class uses the ANSI escape sequences to color the terminal
@@ -9,9 +13,9 @@
 namespace mee{
 
 
-enum textAttributes {ALL_OFF, BOLD, UNDERSCORE = 4, BLINK};
-enum textColors {BLACK = 30, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE};
-enum backColors {BLACK = 40, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE};
+enum class textAttributes {ALL_OFF, BOLD, UNDERSCORE = 4, BLINK};
+enum class textColors {BLACK = 30, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE};
+enum class backColors {BLACK = 40, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE};
 
 #include <string>
 #include <sstream>
@@ -19,7 +23,8 @@ enum backColors {BLACK = 40, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE};
 class TermColors{
 private:
 public:
-	TermColors();
+	TermColors()
+	{		}
 	std::string eraseLine()
 	{	return "\033[K";	}
 	std::string eraseLine(unsigned int row){
@@ -34,7 +39,7 @@ public:
 	}
 	std::string setColor(mee::textColors txt, mee::backColors bck){
 		std::stringstream text;
-		text << "\033[" << txt << ';' << bck << 'm';
+		text << "\033[" << static_cast<int>(txt) << ';' << static_cast<int>(bck) << 'm';
 		return text.str();
 	}
 	std::string setPos(unsigned int row, unsigned int col = 0){
