@@ -10,6 +10,7 @@
 
 enum Suits{	SPADES, HEARTS, CLUBS, DIAMONDS, NUM };
 enum suitColor{ RED, BLACK };
+enum cardValue{ ACE = 1, JACK = 11, QUEEN, KING };
 
 class Card{
 private:
@@ -25,6 +26,8 @@ public:
 	{	return suit;	}
 	bool isFaceUp() const
 	{	return faceUp;	}
+	void flip()
+	{	faceUp ? faceUp = false : faceUp = true;	}
 	suitColor getColor() const{
 		if(suit == SPADES || suit == CLUBS){
 			return RED;

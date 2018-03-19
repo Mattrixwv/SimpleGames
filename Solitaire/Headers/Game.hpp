@@ -19,27 +19,33 @@
 class Game{
 private:
 	std::vector<Card> piles[NUM_PILES];
-	std::vector<Card> foundations[Suits::NUM];
+	std::stack<Card> foundations[Suits::NUM];
 	std::stack<Card> draw;
 	std::stack<Card> discard;
 	mee::TermColors term;
+	bool gmOvr;
 	void setup();	//Sets up the different piles for cards. Only called in setup and reset
-	void shuffle();
 	void deal();
+	void flip();
+	void drawToDiscard();
 	void discardToPile(unsigned int pil);
-	void discardToFoundation(unsigned int found);
+	void discardToFoundation(Suits found = NUM);
 	void foundationToPile(unsigned int found, unsigned int pil);
-	void pileToFoundation(unsigned int pil, unsigned int found);
+	void pileToFoundation(unsigned int pil, Suits found = NUM);
 	void pileToPile(unsigned int fromPil, unsigned int toPil);
-	bool isValidMove(Card* fromCard, Card* toCard, bool isFoundation = false);	//Checks if you can move a card
+	bool isValidMove(Card fromCard, Card toCard, bool isFoundation = false);	//Checks if you can move a card
 	std::string suggestion();	//Returns a valid move
 public:
 	Game();
 	~Game();
 	std::string instruction(std::string move);
-	std::string operator()(std::string move);	//Simply calls instruction
+	inline std::string operator()(std::string move)	{	instruction(move);	}
 	std::string print(Card card);
-	std::string print();	//Prints everythingin the draw. Used for debugging
+	//std::string print();	//Prints everythingin the draw. Used for debugging
+	std::string printBoard(std::string errorMsg);
+	std::string printInstructions();
+	bool win();
+	bool gameOver();
 };
 
 #endif //GAME_HPP

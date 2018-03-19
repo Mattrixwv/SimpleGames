@@ -37,6 +37,16 @@ public:
 	std::string setAttr(mee::textAttributes atr){
 
 	}
+	std::string setText(mee::textColors txt){
+		std::stringstream text;
+		text << "\033[" << static_cast<int>(txt) << 'm';
+		return text.str();
+	}
+	std::string setBackground(mee::backColors bck){
+		std::stringstream text;
+		text << "\033[" << static_cast<int>(bck) << 'm';
+		return text.str();
+	}
 	std::string setColor(mee::textColors txt, mee::backColors bck){
 		std::stringstream text;
 		text << "\033[" << static_cast<int>(txt) << ';' << static_cast<int>(bck) << 'm';

@@ -7,7 +7,7 @@ SRCDIR =
 
 
 
-Solitaire: 
+Solitaire: main.cpp SourceFiles/Game.cpp
 	$(CXX) -o $@ $^ $(CFLAGS) $(LIBS)
 
 .PHONY: clean

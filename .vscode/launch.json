@@ -5,24 +5,17 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"name": "Build and Launch Solitairedbg",
+			"name": "Build and Launch Solitaire Debug",
 			"type": "cppdbg",
 			"request": "launch",
-			"program": "${workspaceFolder}/Solitaire/bin/Solitairedbg",
+			"program": "${workspaceFolder}/bin/Solitairedbg.exe",
 			"args": [],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
 			"environment": [],
 			"externalConsole": true,
-			"MIMode": "gdb",
-			"setupCommands": [
-				{
-					"description": "Enable pretty-printing for gdb",
-					"text": "-enable-pretty-printing",
-					"ignoreFailures": true
-				}
-			],
-			"preLaunchTask": "Build Solitairedbg"
+			"preLaunchTask": "Build Solitaire Debug",
+			"miDebuggerPath": "C:\\mingw-w64\\x86_64-7.2.0-posix-seh-rt_v5-rev1\\mingw64\\bin\\gdb.exe"
 		}
 	]
 }
