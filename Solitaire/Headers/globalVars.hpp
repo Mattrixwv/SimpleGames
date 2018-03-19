@@ -11,55 +11,57 @@
 
 #include "TermColors.hpp"
 
-const unsigned int NUM_PILES = 7;
-const mee::textColors CARD_BACK_COLOR = mee::textColors::BLUE;
-const char CARD_BACK[4] = "#*#";
+#define NUM_PILES 7
+extern const mee::textColors CARD_BACK_COLOR;
+extern const char CARD_BACK[4];
+extern const mee::textColors BLACK_CARD_COLOR;
+extern const mee::textColors RED_CARD_COLOR;
 
 ///Card locations
-const unsigned int TOP_ROW = 2;
-const unsigned int COL_OFFSET = 2;
-const unsigned int COL_WIDTH = 5;
+extern const unsigned int TOP_ROW;
+extern const unsigned int COL_OFFSET;
+extern const unsigned int COL_WIDTH;
 
 
 //Columns
-const unsigned int FIRST_COL = 1;
-const unsigned int SECOND_COL = FIRST_COL + COL_WIDTH + COL_OFFSET;
-const unsigned int THIRD_COL = SECOND_COL + COL_WIDTH + COL_OFFSET;
-const unsigned int FOURTH_COL = THIRD_COL + COL_WIDTH + COL_OFFSET;
-const unsigned int FIFTH_COL = FOURTH_COL + COL_WIDTH + COL_OFFSET;
-const unsigned int SIXTH_COL = FIFTH_COL + COL_WIDTH + COL_OFFSET;
-const unsigned int SEVENTH_COL = SIXTH_COL + COL_WIDTH + COL_OFFSET;
-const unsigned int EIGHTH_COL = SEVENTH_COL + COL_WIDTH + COL_OFFSET;
+extern const unsigned int FIRST_COL;
+extern const unsigned int SECOND_COL;
+extern const unsigned int THIRD_COL;
+extern const unsigned int FOURTH_COL;
+extern const unsigned int FIFTH_COL;
+extern const unsigned int SIXTH_COL;
+extern const unsigned int SEVENTH_COL;
+extern const unsigned int EIGHTH_COL;
 
-const unsigned int COLUMNS[] {FIRST_COL, SECOND_COL, THIRD_COL, FOURTH_COL, FIFTH_COL, SIXTH_COL, SEVENTH_COL, EIGHTH_COL};
+extern const unsigned int COLUMNS[];
 
 
 //Draw
-const unsigned int DRAW_ROW = TOP_ROW;
-const unsigned int DRAW_COL = FIRST_COL;
+extern const unsigned int DRAW_ROW;
+extern const unsigned int DRAW_COL;
 
 
 //Discard
-const unsigned int DISCARD_ROW = TOP_ROW;
-const unsigned int DISCARD_COL = SECOND_COL;
+extern const unsigned int DISCARD_ROW;
+extern const unsigned int DISCARD_COL;
 
 
 //Foundations
-const unsigned int FOUNDATION1_ROW = TOP_ROW;
-const unsigned int FOUNDATION1_COL = FOURTH_COL;
-const unsigned int FOUNDATION2_ROW = TOP_ROW;
-const unsigned int FOUNDATION2_COL = FIFTH_COL;
-const unsigned int FOUNDATION3_ROW = TOP_ROW;
-const unsigned int FOUNDATION3_COL = SIXTH_COL;
-const unsigned int FOUNDATION4_ROW = TOP_ROW;
-const unsigned int FOUNDATION4_COL = SEVENTH_COL;
+extern const unsigned int FOUNDATION1_ROW;
+extern const unsigned int FOUNDATION1_COL;
+extern const unsigned int FOUNDATION2_ROW;
+extern const unsigned int FOUNDATION2_COL;
+extern const unsigned int FOUNDATION3_ROW;
+extern const unsigned int FOUNDATION3_COL;
+extern const unsigned int FOUNDATION4_ROW;
+extern const unsigned int FOUNDATION4_COL;
 
-const unsigned int FOUNDATION_ROWS[] {FOUNDATION1_ROW, FOUNDATION2_ROW, FOUNDATION3_ROW, FOUNDATION4_ROW};
-const unsigned int FOUNDATION_COLS[] {FOUNDATION1_COL, FOUNDATION2_COL, FOUNDATION3_COL, FOUNDATION4_COL};
+extern const unsigned int FOUNDATION_ROWS[];
+extern const unsigned int FOUNDATION_COLS[];
 
 
 //Piles
-const unsigned int PILES_TOP_ROW = 4;
+extern const unsigned int PILES_TOP_ROW;
 
 
 #endif //GLOBAL_VARS_HPP

@@ -10,6 +10,9 @@
 #ifndef TERMCOLORS_HPP
 #define TERMCOLORS_HPP
 
+#include <string>
+#include <sstream>
+
 namespace mee{
 
 
@@ -17,8 +20,6 @@ enum class textAttributes {ALL_OFF, BOLD, UNDERSCORE = 4, BLINK};
 enum class textColors {BLACK = 30, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE};
 enum class backColors {BLACK = 40, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE};
 
-#include <string>
-#include <sstream>
 
 class TermColors{
 private:

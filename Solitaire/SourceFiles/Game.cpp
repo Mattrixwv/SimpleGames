@@ -404,7 +404,7 @@ std::string Game::instruction(std::string move){
 	}
 	flip();
 	//Print the new screen as well as any error messages
-	printBoard(errorMsg);
+	return printBoard(errorMsg);
 }
 
 std::string Game::print(Card card){
@@ -412,17 +412,19 @@ std::string Game::print(Card card){
 	//If the card is face down print the back of the card
 	if(!card.isFaceUp()){
 		printedCard << term.setText(CARD_BACK_COLOR) << '|' << std::right << std::setw(3) << CARD_BACK << '|';
+		return printedCard.str();
 	}
 
 	//Otherwise print the card
 	//Set the color
+	printedCard << term.setText(CARD_BACK_COLOR) << '|';
 	if(card.getColor() == RED){
-		printedCard << term.setText(mee::textColors::RED);
+		printedCard << term.setText(RED_CARD_COLOR);
 	}
 	else{
-		printedCard << term.setText(mee::textColors::WHITE);
+		printedCard << term.setText(BLACK_CARD_COLOR);
 	}
-	printedCard << term.setText(CARD_BACK_COLOR) << '|' << std::right << std::setw(2);
+	printedCard << std::right << std::setw(2);
 
 	//Print the number or letter
 	if(card.getSize() == ACE){
@@ -476,18 +478,6 @@ std::string Game::print(Card card){
 	return printedCard.str();
 }
 
-/*
-std::string Game::print(){
-	//Need to add Colors
-	std::stringstream temp("");
-	while(!draw.empty()){
-		temp << draw.top().getSize() << ' ' << draw.top().getSuit() << '\n';
-		draw.pop();
-	}
-	return temp.str();
-}
-*/
-
 std::string Game::printBoard(std::string errorMsg){
 	std::stringstream screen;
 	//Clear the screen
@@ -514,30 +504,30 @@ std::string Game::printBoard(std::string errorMsg){
 			#ifdef _WIN32
 			//For windows
 			if(foundCnt == SPADES){
-				screen << term.setText(mee::textColors::BLACK) << 'S';
+				screen << term.setText(BLACK_CARD_COLOR) << 'S';
 			}
 			else if(foundCnt == HEARTS){
-				screen << term.setText(mee::textColors::RED) << 'H';
+				screen << term.setText(RED_CARD_COLOR) << 'H';
 			}
 			else if(foundCnt == DIAMONDS){
-				screen << term.setText(mee::textColors::RED) << 'D';
+				screen << term.setText(RED_CARD_COLOR) << 'D';
 			}
 			else{
-				screen << term.setText(mee::textColors::BLACK) << 'C';
+				screen << term.setText(BLACK_CARD_COLOR) << 'C';
 			}
 			//For linux
 			#else
 			if(foundCnt == SPADES){
-				screen << term.setText(mee::textColors::BLACK) << u8"\u2660";
+				screen << term.setText(BLACK_CARD_COLOR) << "  " << u8"\u2660";
 			}
 			else if(foundCnt == HEARTS){
-				screen << term.setText(mee::textColors::RED) << u8"\u2665";
+				screen << term.setText(RED_CARD_COLOR) << "  " << u8"\u2665";
 			}
 			else if(foundCnt == DIAMONDS){
-				screen << term.setText(mee::textColors::RED) << u8"\u2666";
+				screen << term.setText(RED_CARD_COLOR) << "  " << u8"\u2666";
 			}
 			else{
-				screen << term.setText(mee::textColors::BLACK) << u8"\u2663";
+				screen << term.setText(BLACK_CARD_COLOR) << "  " << u8"\u2663";
 			}
 			#endif //_WIN32
 		}
@@ -548,11 +538,13 @@ std::string Game::printBoard(std::string errorMsg){
 		//Print the cards from bottom to top, accounting for faceUp
 		for(int loc = 0;loc < piles[pilesCnt].size();++loc){
 			//Print the card at the current location
-			screen << term.setPos((FOUNDATION_ROWS[pilesCnt] + loc), FOUNDATION_COLS[pilesCnt]) << print(piles[pilesCnt].at(loc));
+			screen << term.setPos((PILES_TOP_ROW + loc), COLUMNS[pilesCnt]) << print(piles[pilesCnt].at(loc));
 		}
-		//Print an extra row for show
-		screen << term.setPos((FOUNDATION_ROWS[pilesCnt] + piles[pilesCnt].size()), FOUNDATION_COLS[pilesCnt]) <<     "|___|";
 	}
+
+	//Move cursor to command input location
+	//7 is the max number of cards dealt, 13 is the max number of cards on top of that
+	screen << term.setPos((PILES_TOP_ROW + 7 + 13), 0);
 
 	return screen.str();
 }

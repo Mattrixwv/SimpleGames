@@ -30,10 +30,10 @@ public:
 	{	faceUp ? faceUp = false : faceUp = true;	}
 	suitColor getColor() const{
 		if(suit == SPADES || suit == CLUBS){
-			return RED;
+			return BLACK;
 		}
 		else{
-			return BLACK;
+			return RED;
 		}
 	}
 };
